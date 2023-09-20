@@ -99,12 +99,12 @@ searchForm.addEventListener("submit", async (e) => {
         let sumaValoresEgreso = valoresEgreso.reduce((total, valor) => total + valor, 0);
 
         // Ahora, tienes dos arrays: valoresIngreso y valoresEgreso, que contienen los valores según su tipo de caja
-        console.log('Valores de Ingreso:', valoresIngreso);
-        console.log('Valores de Egreso:', valoresEgreso);
+        //console.log('Valores de Ingreso:', valoresIngreso);
+        //console.log('Valores de Egreso:', valoresEgreso);
 
         // Imprimir las sumas
-        console.log('Suma de Valores de Ingreso:', sumaValoresIngreso);
-        console.log('Suma de Valores de Egreso:', sumaValoresEgreso);
+        //console.log('Suma de Valores de Ingreso:', sumaValoresIngreso);
+        //console.log('Suma de Valores de Egreso:', sumaValoresEgreso);
 
         //Saldo total
 
@@ -115,6 +115,14 @@ searchForm.addEventListener("submit", async (e) => {
                 <td>${datosID[foundIndex]}</td>
                 <td>${datosValor[foundIndex]}</td>
                 <td>${datosCaja[foundIndex]}</td>
+            </tr>
+        `;
+
+        showTotal.innerHTML = `
+            <tr>
+                <td>${sumaValoresIngreso}</td>
+                <td>${sumaValoresEgreso}</td>
+                <td>${sumaValoresIngreso-sumaValoresEgreso}</td>
             </tr>
         `;
     } else {
