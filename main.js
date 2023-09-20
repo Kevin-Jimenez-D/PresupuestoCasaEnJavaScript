@@ -43,6 +43,44 @@ addEventListener("DOMContentLoaded", async()=>{
         //BUSCARV
     }
 
+    //Saldo total 
+        //lo hace bien pero solo cuando oprimo el boton Buscar ID
+        // Iterar a través de los datos y clasificarlos en los arrays correspondientes
+        for (let i = 0; i < datosCaja.length; i++) {
+            if (datosCaja[i] === 'ingreso') {
+                valoresIngreso.push(datosValor[i]);
+            } else if (datosCaja[i] === 'egreso') {
+                valoresEgreso.push(datosValor[i]);
+            }
+        }
+
+        // Sumar todos los valores de ingreso
+        let sumaValoresIngreso = valoresIngreso.reduce((total, valor) => total + valor, 0);
+
+        // Sumar todos los valores de egreso
+        let sumaValoresEgreso = valoresEgreso.reduce((total, valor) => total + valor, 0);
+
+        // Ahora, tienes dos arrays: valoresIngreso y valoresEgreso, que contienen los valores según su tipo de caja
+        //console.log('Valores de Ingreso:', valoresIngreso);
+        //console.log('Valores de Egreso:', valoresEgreso);
+
+        // Imprimir las sumas
+        //console.log('Suma de Valores de Ingreso:', sumaValoresIngreso);
+        //console.log('Suma de Valores de Egreso:', sumaValoresEgreso);
+
+    //Saldo total
+
+
+    //Saldo total
+    showTotal.innerHTML = `
+    <tr>
+        <td>${sumaValoresIngreso}</td>
+        <td>${sumaValoresEgreso}</td>
+        <td>${sumaValoresIngreso-sumaValoresEgreso}</td>
+    </tr>
+    `;
+    //Saldo total
+
     //console.log(datosID)           //y acá los visualizo
 
 })
@@ -80,36 +118,6 @@ searchForm.addEventListener("submit", async (e) => {
         //console.log(datosValor);
         //console.log(datosCaja);
 
-
-
-        //Saldo total lo hace bien pero solo cuando oprimo el boton Buscar ID
-        // Iterar a través de los datos y clasificarlos en los arrays correspondientes
-        for (let i = 0; i < datosCaja.length; i++) {
-            if (datosCaja[i] === 'ingreso') {
-                valoresIngreso.push(datosValor[i]);
-            } else if (datosCaja[i] === 'egreso') {
-                valoresEgreso.push(datosValor[i]);
-            }
-        }
-
-        // Sumar todos los valores de ingreso
-        let sumaValoresIngreso = valoresIngreso.reduce((total, valor) => total + valor, 0);
-
-        // Sumar todos los valores de egreso
-        let sumaValoresEgreso = valoresEgreso.reduce((total, valor) => total + valor, 0);
-
-        // Ahora, tienes dos arrays: valoresIngreso y valoresEgreso, que contienen los valores según su tipo de caja
-        //console.log('Valores de Ingreso:', valoresIngreso);
-        //console.log('Valores de Egreso:', valoresEgreso);
-
-        // Imprimir las sumas
-        //console.log('Suma de Valores de Ingreso:', sumaValoresIngreso);
-        //console.log('Suma de Valores de Egreso:', sumaValoresEgreso);
-
-        //Saldo total
-
-
-
         searchTableBody.innerHTML = `
             <tr>
                 <td>${datosID[foundIndex]}</td>
@@ -118,13 +126,6 @@ searchForm.addEventListener("submit", async (e) => {
             </tr>
         `;
 
-        showTotal.innerHTML = `
-            <tr>
-                <td>${sumaValoresIngreso}</td>
-                <td>${sumaValoresEgreso}</td>
-                <td>${sumaValoresIngreso-sumaValoresEgreso}</td>
-            </tr>
-        `;
     } else {
         // La ID no fue encontrada, muestra un mensaje de error o haz lo que necesites
         searchTableBody.innerHTML = `<tr><td colspan="3">ID no encontrada</td></tr>`;
