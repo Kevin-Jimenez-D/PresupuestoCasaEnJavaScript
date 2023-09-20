@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>API</title>
+    <!--
+        <script src="main.js" type="module" defer></script>
+    -->
+</head>
+<body>
+    
+    <form>
+        <input type="number" required name="valor" placeholder="Ingrese el monto"> <br>
+        <input type="radio" name="caja" value="ingreso" checked="true"> <label>Ingreso</label>
+        <input type="radio" name="caja" value="egreso"> <label>Egreso</label> <br>
+        <input type="submit" value="calcular">
+    </form>
+
+    <table border="solid">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Valor</th>
+                <th>Tipo</th>
+            </tr>
+        </thead>
+        <tbody id="myData">
+
+        </tbody>
+    </table> <br>
+
+    <!--Tabla para buscar-->
+    <!--En la parte del form el id, se lo agregue para probar algo-->
+    <form id="searchForm">
+        <input type="number" required name="ID" placeholder="Ingrese la id para buscar"> <br>
+        <input type="submit" value="Buscar ID">
+    </form>
+
+    <table border="solid">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Valor</th>
+                <th>Tipo</th>
+            </tr>
+        </thead>
+        <tbody id="search">
+
+        </tbody>
+    </table>
+
+    
+
+<script src="main.js"></script>
+</body>
+</html>
