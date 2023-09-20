@@ -17,7 +17,10 @@ let valoresEgreso = [];
 
 //Saldo total
 
-
+//EDITAR
+// Agregar un evento "submit" al formulario de edición
+const editForm = document.querySelector("#edit");
+//EDITAR
 
 let datosID=[];     //Esto es para guardar el ID de cada uno de los datos
 let datosValor=[];  //Esto es para guardar los valores de dinero
@@ -133,3 +136,36 @@ searchForm.addEventListener("submit", async (e) => {
 });
 
 //BUSCARV
+
+//EDITAR
+editForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    // Obtener los valores de ID y el nuevo valor del formulario de edición
+    const idToEdit = document.querySelector("input[name='EditarID']").value;                  //Aca debo dejarlo en string para que me analice con datosID
+    const newValue = parseFloat(document.querySelector("input[name='EditarValor']").value);
+
+    // Buscar el índice de la ID en el array datosID
+    const foundIndex = datosID.indexOf(idToEdit);                                             //Aca mira si el dato ingresado en el HTML esta en el array
+
+    console.log(idToEdit);    //numerico y es el valor que coloco en el HTML en el ID   
+    console.log(newValue);    //numerico y es el valor que coloco en el HTML en el Valor   
+
+    // Verificar si la ID existe en los datos
+    if (foundIndex !== -1) {
+        // Actualizar el valor en el array datosValor
+        datosValor[foundIndex] = newValue;
+
+        // Actualizar el valor en la tabla HTML
+        const rowToUpdate = myTabla.querySelector(`tr:nth-child(${foundIndex + 1})`);
+        rowToUpdate.querySelector("td:nth-child(2)").textContent = newValue;
+
+        // Limpiar los campos de edición
+        document.querySelector("input[name='EditarID']").value = "";
+        document.querySelector("input[name='EditarValor']").value = "";
+    } else {
+        // Si la ID no se encuentra, muestra un mensaje de error
+        alert("ID no encontrada");
+    }
+});
+//EDITAR
