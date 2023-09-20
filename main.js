@@ -6,13 +6,26 @@ let searchForm = document.querySelector("#searchForm"); // selecciona el formula
 let searchTableBody = document.querySelector("#search"); // selecciona el tbody de búsqueda donde se evidenciara en el HTML la ID buscada
 //BUSCARV
 
+
+
+//Saldo total
+// Crear dos arrays para almacenar los valores de ingreso y egreso
+
+let showTotal=document.querySelector("#saldoTotal");
+let valoresIngreso = [];
+let valoresEgreso = [];
+
+//Saldo total
+
+
+
 let datosID=[];     //Esto es para guardar el ID de cada uno de los datos
 let datosValor=[];  //Esto es para guardar los valores de dinero
 let datosCaja=[];   //Esto es para guardar si es ingreso o egreso
 
 addEventListener("DOMContentLoaded", async()=>{
     let res = await (await fetch("https://6509e7e7f6553137159c3ae5.mockapi.io/presupuestoCasa")).json();
-    console.log(res);            //Aca guarda en un array lo que trae del HTML, como en forma de diccionario
+    //console.log(res);            //Aca guarda en un array lo que trae del HTML, como en forma de diccionario
     //extrae cada uno de los elementos con el for y los va agregando al HTML
     for(let i=0; i< res.length ; i++){
         myTabla.insertAdjacentHTML("beforeend", `
@@ -30,7 +43,7 @@ addEventListener("DOMContentLoaded", async()=>{
         //BUSCARV
     }
 
-    console.log(datosID)           //y acá los visualizo
+    //console.log(datosID)           //y acá los visualizo
 
 })
 
@@ -45,7 +58,7 @@ myfrom.addEventListener("submit", async(e)=>{
         body: JSON.stringify(data)
     };
     let res = await (await fetch("https://6509e7e7f6553137159c3ae5.mockapi.io/presupuestoCasa",config)).json();
-    console.log(res);
+    //console.log(res);
 })
 
 
@@ -66,6 +79,37 @@ searchForm.addEventListener("submit", async (e) => {
         //console.log(foundIndex);   
         //console.log(datosValor);
         //console.log(datosCaja);
+
+
+
+        //Saldo total lo hace bien pero solo cuando oprimo el boton Buscar ID
+        // Iterar a través de los datos y clasificarlos en los arrays correspondientes
+        for (let i = 0; i < datosCaja.length; i++) {
+            if (datosCaja[i] === 'ingreso') {
+                valoresIngreso.push(datosValor[i]);
+            } else if (datosCaja[i] === 'egreso') {
+                valoresEgreso.push(datosValor[i]);
+            }
+        }
+
+        // Sumar todos los valores de ingreso
+        let sumaValoresIngreso = valoresIngreso.reduce((total, valor) => total + valor, 0);
+
+        // Sumar todos los valores de egreso
+        let sumaValoresEgreso = valoresEgreso.reduce((total, valor) => total + valor, 0);
+
+        // Ahora, tienes dos arrays: valoresIngreso y valoresEgreso, que contienen los valores según su tipo de caja
+        console.log('Valores de Ingreso:', valoresIngreso);
+        console.log('Valores de Egreso:', valoresEgreso);
+
+        // Imprimir las sumas
+        console.log('Suma de Valores de Ingreso:', sumaValoresIngreso);
+        console.log('Suma de Valores de Egreso:', sumaValoresEgreso);
+
+        //Saldo total
+
+
+
         searchTableBody.innerHTML = `
             <tr>
                 <td>${datosID[foundIndex]}</td>
