@@ -1,4 +1,4 @@
-let myfrom=document.querySelector("form");       
+let myfrom=document.querySelector("form");       //Va a apuntar a todos los forms
 let myTabla=document.querySelector("#myData");  //Va a apuntar a la primera tabla que se llena en el HTML
 
 //BUSCARV
@@ -11,7 +11,7 @@ let searchTableBody = document.querySelector("#search"); // selecciona el tbody 
 //Saldo total
 // Crear dos arrays para almacenar los valores de ingreso y egreso
 
-let showTotal=document.querySelector("#saldoTotal");
+let showTotal=document.querySelector("#saldoTotal");    //Apunta a una tabla en el HTML para evidenciar el saldo total
 let valoresIngreso = [];
 let valoresEgreso = [];
 
@@ -19,16 +19,16 @@ let valoresEgreso = [];
 
 //EDITAR
 // Agregar un evento "submit" al formulario de edición
-const editForm = document.querySelector("#edit");
+const editForm = document.querySelector("#edit");       //Para rastrear el evento cuando se vaya a editar algo
 //EDITAR
 
 //ELIMINAR
 // Agregar un evento "submit" al formulario de eliminación
-const deleteForm = document.querySelector("#delete");
+const deleteForm = document.querySelector("#delete");    //Para rastrear el evento cuando se vaya a eliminar algo
 //ELIMINAR
 
 //ACTUALIZAR
-const actualizarForm=document.querySelector("#actualizar");
+const actualizarForm=document.querySelector("#actualizar");  //Para rastrear el evento cuando se vaya a actualizar algo, como si se actualizara toda la pagina
 //ACTUALIZAR
 
 let datosID=[];     //Esto es para guardar el ID de cada uno de los datos
@@ -58,8 +58,9 @@ addEventListener("DOMContentLoaded", async()=>{
     
     //Saldo total 
     
-        //lo hace bien pero solo cuando oprimo el boton Buscar ID
+        //lo hace bien con el boton actualizar valores
         // Iterar a través de los datos y clasificarlos en los arrays correspondientes
+        //Los valores de ingreso los guarda en el array ingreso, lo mismo con lo de los egresos
         for (let i = 0; i < datosCaja.length; i++) {
             if (datosCaja[i] === 'ingreso') {
                 valoresIngreso.push(datosValor[i]);
@@ -67,6 +68,11 @@ addEventListener("DOMContentLoaded", async()=>{
                 valoresEgreso.push(datosValor[i]);
             }
         }
+        //.reduce() es un método de los arrays en JavaScript que se utiliza para reducir un array a un solo valor
+        //En esta función, total representa el acumulador de la suma
+        //valor representa el valor actual del elemento que está siendo procesado.
+        //total + valor simplemente suma el valor actual (valor) al acumulador (total) en cada iteración.
+        //es el valor inicial del acumulador, que en este caso es 0. Esto significa que la suma comenzará desde cero.
 
         // Sumar todos los valores de ingreso
         let sumaValoresIngreso = valoresIngreso.reduce((total, valor) => total + valor, 0);
@@ -101,6 +107,8 @@ addEventListener("DOMContentLoaded", async()=>{
 
 })
 
+//stringify para pasarlo por una web en forma de cadena
+//en el id del mockapi el presupuestoCasa es el nombre de la API que aparece enla aplicacion al abrirla
 myfrom.addEventListener("submit", async(e)=>{
     e.preventDefault();
     const data=Object.fromEntries(new FormData(e.target));
@@ -133,7 +141,7 @@ searchForm.addEventListener("submit", async (e) => {
         //console.log(foundIndex);   
         //console.log(datosValor);
         //console.log(datosCaja);
-
+        //Se evidencia en el HTML
         searchTableBody.innerHTML = `
             <tr>
                 <td>${datosID[foundIndex]}</td>
@@ -192,7 +200,10 @@ editForm.addEventListener("submit", async (e) => {
 
     if (foundIndex !== -1) {
         datosValor[foundIndex] = newValue;
+        //En este caso, se está utilizando una plantilla de cadena (template literal) para crear una cadena de consulta dinámica. ${foundIndex + 1} se utiliza para seleccionar la fila específica que corresponde al elemento que se está editando
+        //como las filas de la tabla comienzan en 1 (en lugar de 0), se le suma 1 para ajustar el índice.
         const rowToUpdate = myTabla.querySelector(`tr:nth-child(${foundIndex + 1})`);
+        //se utiliza para seleccionar la segunda celda (<td>) dentro de la fila. En una tabla HTML, las celdas se numeran desde 1, por lo que nth-child(2) selecciona la segunda celda.
         rowToUpdate.querySelector("td:nth-child(2)").textContent = parseFloat(newValue);
         //console.log(newValue);
 
@@ -203,13 +214,14 @@ editForm.addEventListener("submit", async (e) => {
         const updateData = {
             valor: newValue
         };
-        
+        //Metodo PUT para editar en mockapi
         let config = {
             method: "PUT",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(updateData)
         };
         
+        //Se trabaja dinamicamente desde la URL para saber la ID a editar y agregarlo en la URL
         const apiUrl = `https://6509e7e7f6553137159c3ae5.mockapi.io/presupuestoCasa/${idToEdit}`;
         await fetch(apiUrl, config);
 
