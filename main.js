@@ -70,11 +70,11 @@ addEventListener("DOMContentLoaded", async()=>{
 
         // Ahora, tienes dos arrays: valoresIngreso y valoresEgreso, que contienen los valores según su tipo de caja
         //console.log('Valores de Ingreso:', valoresIngreso);
-        //console.log('Valores de Egreso:', valoresEgreso);
+        console.log('Valores de Egreso:', valoresEgreso);
 
         // Imprimir las sumas
         //console.log('Suma de Valores de Ingreso:', sumaValoresIngreso);
-        //console.log('Suma de Valores de Egreso:', sumaValoresEgreso);
+        console.log('Suma de Valores de Egreso:', sumaValoresEgreso);
 
     //Saldo total
 
@@ -143,6 +143,7 @@ searchForm.addEventListener("submit", async (e) => {
 //BUSCARV
 
 //EDITAR
+/*
 editForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -170,6 +171,41 @@ editForm.addEventListener("submit", async (e) => {
         document.querySelector("input[name='EditarValor']").value = "";
     } else {
         // Si la ID no se encuentra, muestra un mensaje de error
+        alert("ID no encontrada");
+    }
+});
+*/
+
+editForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const idToEdit = document.querySelector("input[name='EditarID']").value;
+    const newValue = parseFloat(document.querySelector("input[name='EditarValor']").value);
+    const foundIndex = datosID.indexOf(idToEdit);
+
+    if (foundIndex !== -1) {
+        datosValor[foundIndex] = newValue;
+        const rowToUpdate = myTabla.querySelector(`tr:nth-child(${foundIndex + 1})`);
+        rowToUpdate.querySelector("td:nth-child(2)").textContent = parseFloat(newValue);
+        //console.log(newValue);
+
+        document.querySelector("input[name='EditarID']").value = "";
+        document.querySelector("input[name='EditarValor']").value = "";
+
+        // Actualizar los datos en el servidor
+        const updateData = {
+            valor: newValue
+        };
+        
+        let config = {
+            method: "PUT",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(updateData)
+        };
+        
+        const apiUrl = `https://6509e7e7f6553137159c3ae5.mockapi.io/presupuestoCasa/${idToEdit}`;
+        await fetch(apiUrl, config);
+
+    } else {
         alert("ID no encontrada");
     }
 });
