@@ -212,6 +212,7 @@ editForm.addEventListener("submit", async (e) => {
 //EDITAR
 
 //ELIMINAR
+/*
 deleteForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -239,4 +240,31 @@ deleteForm.addEventListener("submit", async (e) => {
         alert("ID no encontrada");
     }
 });
+*/
+
+deleteForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const idToDelete = document.querySelector("input[name='deleteID']").value;
+    const foundIndex = datosID.indexOf(idToDelete);
+
+    if (foundIndex !== -1) {
+        // Eliminar la ID y su valor correspondiente de los arrays
+        datosID.splice(foundIndex, 1);
+        datosValor.splice(foundIndex, 1);
+        datosCaja.splice(foundIndex, 1);
+
+        // Eliminar la fila de la tabla HTML
+        const rowToDelete = myTabla.querySelector(`tr:nth-child(${foundIndex + 1})`);
+        rowToDelete.remove();
+
+        document.querySelector("input[name='deleteID']").value = "";
+
+        // Eliminar los datos en el servidor
+        const apiUrl = `https://6509e7e7f6553137159c3ae5.mockapi.io/presupuestoCasa/${idToDelete}`;
+        await fetch(apiUrl, { method: "DELETE" });
+    } else {
+        alert("ID no encontrada");
+    }
+});
+
 //ELIMINAR
