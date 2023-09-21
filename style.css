@@ -2,3 +2,63 @@
     margin: 0;
     padding: 0;
 }
+
+/* Estilos para la sección "crear" */
+.crear {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.crear form {
+    margin-bottom: 10px;
+}
+
+/* Estilos para la sección "total" */
+.total {
+    background-color: #e0e0e0;
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.total form {
+    margin-bottom: 10px;
+}
+
+/* Estilos para la sección "buscar" */
+.buscar {
+    background-color: #d0d0d0;
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.buscar form {
+    margin-bottom: 10px;
+}
+
+/* Estilos para la sección "editar" */
+.editar {
+    background-color: #c0c0c0;
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.editar form {
+    margin-bottom: 10px;
+}
+
+/* Estilos para la sección "eliminar" */
+.eliminar {
+    background-color: #b0b0b0;
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.eliminar form {
+    margin-bottom: 10px;
+}
