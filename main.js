@@ -27,6 +27,10 @@ const editForm = document.querySelector("#edit");
 const deleteForm = document.querySelector("#delete");
 //ELIMINAR
 
+//ACTUALIZAR
+const actualizarForm=document.querySelector("#actualizar");
+//ACTUALIZAR
+
 let datosID=[];     //Esto es para guardar el ID de cada uno de los datos
 let datosValor=[];  //Esto es para guardar los valores de dinero
 let datosCaja=[];   //Esto es para guardar si es ingreso o egreso
@@ -51,7 +55,9 @@ addEventListener("DOMContentLoaded", async()=>{
         //BUSCARV
     }
 
+    
     //Saldo total 
+    
         //lo hace bien pero solo cuando oprimo el boton Buscar ID
         // Iterar a través de los datos y clasificarlos en los arrays correspondientes
         for (let i = 0; i < datosCaja.length; i++) {
@@ -87,7 +93,9 @@ addEventListener("DOMContentLoaded", async()=>{
         <td>${sumaValoresIngreso-sumaValoresEgreso}</td>
     </tr>
     `;
+    
     //Saldo total
+    
 
     //console.log(datosID)           //y acá los visualizo
 
@@ -268,3 +276,47 @@ deleteForm.addEventListener("submit", async (e) => {
 });
 
 //ELIMINAR
+
+//ACTUALIZAR
+actualizarForm.addEventListener("submit", async (e) => {
+    //Saldo total 
+    
+        //lo hace bien pero solo cuando oprimo el boton Buscar ID
+        // Iterar a través de los datos y clasificarlos en los arrays correspondientes
+        for (let i = 0; i < datosCaja.length; i++) {
+            if (datosCaja[i] === 'ingreso') {
+                valoresIngreso.push(datosValor[i]);
+            } else if (datosCaja[i] === 'egreso') {
+                valoresEgreso.push(datosValor[i]);
+            }
+        }
+
+        // Sumar todos los valores de ingreso
+        let sumaValoresIngreso = valoresIngreso.reduce((total, valor) => total + valor, 0);
+
+        // Sumar todos los valores de egreso
+        let sumaValoresEgreso = valoresEgreso.reduce((total, valor) => total + valor, 0);
+
+        // Ahora, tienes dos arrays: valoresIngreso y valoresEgreso, que contienen los valores según su tipo de caja
+        //console.log('Valores de Ingreso:', valoresIngreso);
+        console.log('Valores de Egreso:', valoresEgreso);
+
+        // Imprimir las sumas
+        //console.log('Suma de Valores de Ingreso:', sumaValoresIngreso);
+        console.log('Suma de Valores de Egreso:', sumaValoresEgreso);
+
+    //Saldo total
+
+
+    //Saldo total
+    showTotal.innerHTML = `
+    <tr>
+        <td>${sumaValoresIngreso}</td>
+        <td>${sumaValoresEgreso}</td>
+        <td>${sumaValoresIngreso-sumaValoresEgreso}</td>
+    </tr>
+    `;
+    
+    //Saldo total
+});
+//ACTUALIZAR
