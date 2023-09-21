@@ -36,3 +36,5 @@ Este proyecto permite administrar un presupuesto de una casa a través de la cap
 ## NOTA
 
 - **Actualizar Valores:** Utiliza el botón "Actualizar Valores" para reflejar los cambios en la página después de realizar acciones de creación, edición o eliminación de registros.
+
+- **Ver proyecto:** Abrir con ver en vivo u open with live server
