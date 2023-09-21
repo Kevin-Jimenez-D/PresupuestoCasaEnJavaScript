@@ -269,6 +269,8 @@ deleteForm.addEventListener("submit", async (e) => {
 
     if (foundIndex !== -1) {
         // Eliminar la ID y su valor correspondiente de los arrays
+        //El método splice se utiliza para modificar un array al agregar, eliminar o reemplazar elementos. Toma dos argumentos principales:
+        //1: Este segundo argumento especifica cuántos elementos deben eliminarse a partir del índice dado
         datosID.splice(foundIndex, 1);
         datosValor.splice(foundIndex, 1);
         datosCaja.splice(foundIndex, 1);
