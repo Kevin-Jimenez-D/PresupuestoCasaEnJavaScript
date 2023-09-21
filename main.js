@@ -22,6 +22,11 @@ let valoresEgreso = [];
 const editForm = document.querySelector("#edit");
 //EDITAR
 
+//ELIMINAR
+// Agregar un evento "submit" al formulario de eliminación
+const deleteForm = document.querySelector("#delete");
+//ELIMINAR
+
 let datosID=[];     //Esto es para guardar el ID de cada uno de los datos
 let datosValor=[];  //Esto es para guardar los valores de dinero
 let datosCaja=[];   //Esto es para guardar si es ingreso o egreso
@@ -169,3 +174,33 @@ editForm.addEventListener("submit", async (e) => {
     }
 });
 //EDITAR
+
+//ELIMINAR
+deleteForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    // Obtener la ID que se va a eliminar desde el formulario
+    const idToDelete = document.querySelector("input[name='deleteID']").value;
+
+    // Buscar el índice de la ID en el array datosID
+    const foundIndex = datosID.indexOf(idToDelete);
+
+    // Verificar si la ID existe en los datos
+    if (foundIndex !== -1) {
+        // Eliminar la ID y su valor correspondiente de los arrays
+        datosID.splice(foundIndex, 1);
+        datosValor.splice(foundIndex, 1);
+        datosCaja.splice(foundIndex, 1);
+
+        // Eliminar la fila de la tabla HTML
+        const rowToDelete = myTabla.querySelector(`tr:nth-child(${foundIndex + 1})`);
+        rowToDelete.remove();
+
+        // Limpiar el campo de eliminación
+        document.querySelector("input[name='deleteID']").value = "";
+    } else {
+        // Si la ID no se encuentra, muestra un mensaje de error
+        alert("ID no encontrada");
+    }
+});
+//ELIMINAR
