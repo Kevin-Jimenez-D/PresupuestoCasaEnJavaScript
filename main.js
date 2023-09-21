@@ -82,11 +82,11 @@ addEventListener("DOMContentLoaded", async()=>{
 
         // Ahora, tienes dos arrays: valoresIngreso y valoresEgreso, que contienen los valores según su tipo de caja
         //console.log('Valores de Ingreso:', valoresIngreso);
-        console.log('Valores de Egreso:', valoresEgreso);
+        //console.log('Valores de Egreso:', valoresEgreso);
 
         // Imprimir las sumas
         //console.log('Suma de Valores de Ingreso:', sumaValoresIngreso);
-        console.log('Suma de Valores de Egreso:', sumaValoresEgreso);
+        //console.log('Suma de Valores de Egreso:', sumaValoresEgreso);
 
     //Saldo total
 
@@ -200,10 +200,16 @@ editForm.addEventListener("submit", async (e) => {
 
     if (foundIndex !== -1) {
         datosValor[foundIndex] = newValue;
+
         //En este caso, se está utilizando una plantilla de cadena (template literal) para crear una cadena de consulta dinámica. ${foundIndex + 1} se utiliza para seleccionar la fila específica que corresponde al elemento que se está editando
+        //selector CSS que busca una fila (<tr>) en la tabla. ${foundIndex + 1} se utiliza para calcular dinámicamente el número de fila que se debe seleccionar. 
         //como las filas de la tabla comienzan en 1 (en lugar de 0), se le suma 1 para ajustar el índice.
         const rowToUpdate = myTabla.querySelector(`tr:nth-child(${foundIndex + 1})`);
+
+
         //se utiliza para seleccionar la segunda celda (<td>) dentro de la fila. En una tabla HTML, las celdas se numeran desde 1, por lo que nth-child(2) selecciona la segunda celda.
+        //nth-child(2) selecciona la segunda celda.
+        //.textContent se utiliza para modificar el contenido de texto dentro de la celda seleccionada.
         rowToUpdate.querySelector("td:nth-child(2)").textContent = parseFloat(newValue);
         //console.log(newValue);
 
@@ -264,6 +270,9 @@ deleteForm.addEventListener("submit", async (e) => {
 
 deleteForm.addEventListener("submit", async (e) => {
     e.preventDefault();
+
+    //En este caso, está buscando un elemento <input> que tenga un atributo name igual a "deleteID", que esta en el HTML de la tabla para eliminar
+    //Ese dato, que es el que ingresa el usuario, es el que comparara con el array
     const idToDelete = document.querySelector("input[name='deleteID']").value;
     const foundIndex = datosID.indexOf(idToDelete);
 
@@ -276,6 +285,7 @@ deleteForm.addEventListener("submit", async (e) => {
         datosCaja.splice(foundIndex, 1);
 
         // Eliminar la fila de la tabla HTML
+        //selector CSS que busca una fila (<tr>) en la tabla. ${foundIndex + 1} se utiliza para calcular dinámicamente el número de fila que se debe seleccionar. 
         const rowToDelete = myTabla.querySelector(`tr:nth-child(${foundIndex + 1})`);
         rowToDelete.remove();
 
