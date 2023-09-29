@@ -21,6 +21,8 @@ Este proyecto permite administrar un presupuesto de una casa a través de la cap
 
 1. Abre el archivo `index.html` en tu navegador para visualizar el proyecto.
 
+ ![image](img/index.png)
+
 2. Para realizar acciones en el presupuesto de la casa, utiliza las siguientes funcionalidades:
 
    - **Buscar ID:** Ingresa una ID en el formulario de búsqueda y haz clic en "Buscar ID" para encontrar registros existentes.
